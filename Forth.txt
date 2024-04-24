@@ -1,0 +1,98 @@
+- Stack based
+    -12 34 56
+            |-> Topo da Stack
+- Pos Fixo
+    - 2 3 + .
+        |-> Dá output a 5
+    - 1 2 3 10 + * + .
+        |-> Dá output a 27
+        |-> (10+3)*2 + 1
+
+
+
+FUNÇÕES / COMANDOS
+
+- . -> Print do topo da Stack
+- n -> Coloca o número "n" no topo da Stack
+- : FUNCAO blabla ; -> Define a função FUNCAO que executa blabla
+- (n -- r) 
+    |-> notação usada para especificar o que uma função vai buscar a stack e o que lá deixa
+    |-> ( n -- ) --> Exemplo da notação de "."
+    |-> (n1 n2 -- sum) --> Exemplo da notação de "+"
+    |-> Exemplo : : AVERAGE ( a b -- avg ) + 2/ ;
+- ." Hello, world " -> Print de uma string
+
+
+
+WORDS
+
+. CR |-> \n 
+
+- SPACES |-> Vai buscar um número ao topo stack e printa esse numero de espaços (esse numero sai da stack)
+
+- EMIT |-> Vai buscar um número ao topo stack, traduz para character (ascii) e printa esse char (esse numero sai da stack)
+        |-> 65 EMIT --> output : A
+
+- /MOD |-> Divide x por y e retorna o resto e o quociente
+
+- MOD |-> Devolve o resto 
+
+- SWAP |-> Self explicativo
+
+- DUP
+
+- DROP |-> Tira o topo da stack
+
+- FORGET `WORD` |-> Esqueça a `word` previamente definida
+
+- EMPTY |-> Esquece todas as definições feitas por nós (mas não as do sistema)
+
+Logica
+    - AND
+    - OR
+    - >
+    - <
+    - =
+
+
+CONDIÇÕES
+
+- (statment) IF (a executar) THEN
+    |-> :   ?FULL 12 = IF ." IT'S FULL " THEN ; ok
+            11 ?FULL
+                output:
+            12 ?FULL
+                output: IT'S FULL 
+
+-   (statment) IF (a executar) ELSE
+    (statment) IF (a executar) ELSE
+    (statment) IF (a executar) ELSE
+            ." ERROR "
+        THEN THEN THEN DROP
+
+LOOPS
+
+- (n) (i) DO (o que se quer repetir) LOOP
+
+DEFINIR VARIAVEIS
+
+- VARIAVEL (NOME)
+
+- ! |-> Guarda um numero de 16-bit
+
+- @ |-> Substitui o address pelo seu conteudo
+
+- ? |-> Printa o conteudo no address
+
+
+|-->VARIABLE DATR
+|--> 12 DATE !
+
+ EXEMPLOS
+
+- : GREET ." HELLO, I SPEAK FORTH " ;
+   GREET .
+    |-> Define GREET como a string especificada e dá print
+
+- 40 ." ola "  SPACES ." mundo " 7 2 + .
+    |-> output : ola                                         mundo 9 
