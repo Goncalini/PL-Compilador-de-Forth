@@ -1,0 +1,66 @@
+"""
+    Line  : Line Elem
+          | &
+
+    Exec : Exec Elem
+         | Elem
+        
+    Elem : NUMB
+         | Operador
+         | '.'
+         | '.'STRING
+         | CHAR LETTER
+         | IF Exec THEN
+         | IF Exec ELSE Exec THEN
+         | Loop
+         | Word
+         | Var
+         | COMENT
+         | EMIT
+         | CR
+         | SWAP
+         | DUP
+         | DROP
+         | KEY
+         | SPACE
+         | SPACES
+         | ATOI
+         | Function
+
+    Operador : ADD
+             | SUB
+             | DIV
+             | MUL
+             | MOD
+             | NOT
+             | AND
+             | OR
+             | EQUAL
+             | BIGGERTHEN
+             | SMALLERTHEN
+             | BIGOREQ
+             | SMALOREQ
+     
+     Word : NAME
+          | SPACES
+
+     Var : VARIABLE WORD
+         | LOOPI
+         | WORD '!'
+         | WORD '@'
+         | WORD '?'
+         | WORD MAIS_EXCLAMACAO"
+
+     Loop : Do Exec LOOP
+          | Begin Exec UNTIL
+          | Begin Exec WHILE Exec REPEAT
+
+     Do : DO
+     
+     Begin : BEGIN
+     
+     Function : Dots WORD Exec ';'"
+
+     Dots : ':' "
+
+"""

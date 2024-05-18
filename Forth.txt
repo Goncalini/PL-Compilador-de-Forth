@@ -74,18 +74,21 @@ LOOPS
 
 - (n) (i) DO (o que se quer repetir) LOOP
 
+- BEGIN (a executar) (flag) UNTIL -> se a flag for falsa, repete
+- BEGIN (a executar) (flag) WHILE (a executar 2) REPEAT 
+
 DEFINIR VARIAVEIS
 
 - VARIAVEL (NOME)
 
-- ! |-> Guarda um numero de 16-bit
+    - ! |-> Guarda um numero de 16-bit
+    
+    - @ |-> Substitui o address pelo seu conteudo
+    
+    - ? |-> Printa o conteudo no address
 
-- @ |-> Substitui o address pelo seu conteudo
 
-- ? |-> Printa o conteudo no address
-
-
-|-->VARIABLE DATR
+|-->VARIABLE DATE
 |--> 12 DATE !
 
  EXEMPLOS
