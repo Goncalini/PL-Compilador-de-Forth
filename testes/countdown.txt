@@ -1,0 +1,2 @@
+: COUNTDOWN ( n -- ) 0 DO I . LOOP ;
+10 COUNTDOWN .

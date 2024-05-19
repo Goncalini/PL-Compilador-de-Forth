@@ -1,0 +1,2 @@
+: SQUARE ( n -- n*n ) DUP * ;
+4 SQUARE .

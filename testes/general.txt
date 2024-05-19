@@ -1,0 +1,41 @@
+: MADD ( n1 n2 -- sum ) + ;
+: MSUB ( n1 n2 -- diff ) - ;
+: MMUL ( n1 n2 -- prod ) * ;
+: MDIV ( n1 n2 -- quot ) / ;
+
+: AVERAGE ( a b -- avg ) + 2/ ;
+: COUNTDOWN ( n -- ) 0 DO I . LOOP ;
+: SQUARE ( n -- n*n ) DUP * ;
+
+: ISPOSITIVE ( n -- )
+  DUP 0 >
+  IF
+    ." Positive" CR
+  ELSE
+    ." Non-positive" CR
+  THEN
+;
+
+: TESTAP
+    CR ." Testing Arithmetic Operations:" CR CR
+    10 5 MADD . CR
+    10 5 MSUB . CR
+    10 5 MMUL . CR
+    10 5 MDIV . CR
+;
+
+: TESTACS
+    CR ." Testing Average, Countdown (Loop), and Square:" CR CR
+    11 17 AVERAGE . CR
+    10 COUNTDOWN CR
+    5 SQUARE . CR
+;
+
+: TESTCOND
+    CR ." Testing Conditionals:" CR CR
+    -10 ISPOSITIVE
+;
+
+TESTAP
+TESTACS
+TESTCOND 
