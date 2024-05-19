@@ -72,7 +72,7 @@ def t_INITIAL_MUL(t):
     r'\*'
     return t
 def t_INITIAL_MOD(t):
-    r'\%'
+    r'\bMOD\b'
     return t
 def t_INITIAL_NOT(t):
     r'\bNOT\b'
