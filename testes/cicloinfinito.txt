@@ -1,0 +1,5 @@
+: ISEQ 1 2 = IF 1 ELSE 0  THEN ;
+ISEQ .
+
+: FUNC BEGIN ." ola " ISEQ UNTIL ;
+FUNC 

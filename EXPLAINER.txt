@@ -1,0 +1,91 @@
+GRAMATICA
+
+EXEC -> PARCELA DO CODIGO EXECUTAVEL
+ELEM -> em como objetivo listar todos os elementos e conteúdos implementados pode ser números, strings, funções/words, variáveis, funções pré definidas entre outros.
+OPERADOR -> OPERADORES MATEMATICOS E LOGICOS
+VAR -> VARIAVEL E INSTRUÇOES
+LOOP -> CICLOS
+DO E BEGIN -> CONDICOES
+
+--------------------------------------------------------
+
+VARIAVEIS DO PARSER
+
+SUCCESS -> SE FUNCIONOU OU NAO 
+ELSECOUNT E THENCOUNT -> CONTADORES DO NUMERO DE ELSES E THENS
+VARPOINTER -> DICIONARIO QUE ARMAZENA OS INDICES DA GLOBAL STACK ASSOCIADOS AS VARIAVEIS E AO CICLOS
+LOOPCOUNT -> CONTA O NUMERO DE LOOPS
+PUSHNCOUNT -> GUARDA O ESPAÇO A ARMAZENAR NO INICIO
+LOOPORDER -> ARMAZENA OS LOOPS POR ORDEM PARA AJUDAR NOS SALTOS DE LOOPS ANINHADOS
+DICFUNC -> DICIONARIO QUE ARMAZENA AS FUNCOES DEFINIDAS
+FUNCFLAG -> VERIFICA SE ESTA NUMA FUNCAO
+
+----------------------------------------------------------
+
+FUNCOES
+
+1- QUANDO ENCONTRA OS DOIS PONTOS SABE QUE ESTA NUMA FUNCAO E PASSA A FUNCFLAG PARA TRUE
+2- GUARDA NUM DICIONARIO A FUNÇÃO, CASO ELA NAO TENHA SIDO DEFINIDA SENÃO DÁ ERROR
+
+-------------------------------------------------------------
+
+CONDICOES
+
+1- VERIFICA QUE ENTRA NUM IF
+    1.1 -> SE NAO TIVER UM ELSE SÓ ENCAIXA O CODIGO ENTRE UM  jz endif E UM endif, COM OS INDICE DO THEN
+    1.2 -> SE TIVER ENCAIXA O CODIGO DO IF ENTRE UM jz else E jump endif E O DO ELSE ENTRE else E UM endif
+2- APOS INCREMENTA SEMPRE AS DEVIDAS VARIAVEIS COM OS INDIICES
+
+--------------------------------------------------------------------------
+
+LOOPS
+
+1- SE ENCONTRAR UM DO
+    1.1- RESERVA ESPAÇO NA MEMORIA
+    1.2- JUNTA SE O LOOP AO LOOPORDER
+    1.3- REALIZA SE A LOGICA DOS SALTOS
+         f"storeg {parser.varpointer[f'LOOP{loopiactual}'][0]}"
+         f"storeg {parser.varpointer[f'LOOP{loopiactual}'][1]}"
+         f"jump loop{loopiactual}"
+         f"loop{loopiactual}:"
+         f"pushg {parser.varpointer[f'LOOP{loopiactual}'][0]}"
+         f"pushg {parser.varpointer[f'LOOP{loopiactual}'][1]}"
+         "sub" -->subtrair a flag do ciclo
+         f"jz endloop{loopiactual}"
+    1.4- APOS ADICIONA SE O CODIGO DO CICLO
+    1.5- DEPOIS FINALIZA SE OS CICLOS E RETIRA SO O LOOP ORDER
+        p[0] += f"""
+        pushg {parser.global_scope[f'LOOP{loopIndex}'][0]}
+        pushi 1
+        add
+        storeg {parser.global_scope[f'LOOP{loopIndex}'][0]}
+        jump loop{loopIndex}
+        endloop{loopIndex}:
+
+2- SE ENCONTRAR UM BEGIN 
+    2.1- NAO E PRECISO RESERVAR MEMORIA ENTAO SALTA SE LOGO PARA O LOOP
+        f"jump loop{loopiactual}"
+        f"loop{loopiactual}:"
+    2.2- SE TIVER UM UNTIL
+        2.2.1- A SEGUIR ACRESCENTA SE O CODIGO DO CICLO E O FIM DO CICLO
+            f"storeg {parser.varpointer[f'LOOP{loopiactual}'][0]}"
+            f"jump loop{loopiactual}"
+            f"endloop{loopiactual}:"
+    2.3- SE TIVER UM WHILE
+        2.3.1- ANTES DO CICLO SER FINALIZADO É ACRESCENTADO A EXPRESSAO DO WHILE APOS A INTRUZAO JZ
+
+
+-----------------------
+
+VARIAVEIS
+
+1- QUANDO IDENTIFICADA É ARMAZENA NO DICIONARIO DE VARIAVEIS CASO JA NAO EXISTA, COM O SEU address
+2- E SAO SUPORTADAS 4 OPERACOES
+    - ! |-> Guarda um numero de 16-bit
+    
+    - @ |-> Substitui o address pelo seu conteudo
+    
+    - ? |-> Printa o conteudo no address
+
+    - +! -> ADICIONA 1 AO VALOR NA VARIAVEL
+    

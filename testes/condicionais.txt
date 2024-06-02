@@ -1,0 +1,1 @@
+1 2 = IF ." Equal " ELSE ." Not Equal " THEN
