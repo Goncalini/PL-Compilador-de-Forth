@@ -6,4 +6,4 @@ Grupo:
 - Marta Rodrigues
 - Diogo Matos
 
-Grade - ??/20
+Grade - 17/20
